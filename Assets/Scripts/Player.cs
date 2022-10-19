@@ -10,8 +10,10 @@ public class Player : MonoBehaviour
     public float jumpSpeed;
     public float verticalSpeed;
     public float moveSpeed;
-
-
+    public bool inLight;
+    public float inLightTimerCur;
+    public float inLightTimerMax;
+    public float maxLightDetectionNumber;
 
     private void Start()
     {
@@ -22,7 +24,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-
+        checkEnemies();
 
         //first person movement controls
         Vector3 movement = Vector3.zero;
@@ -53,5 +55,50 @@ public class Player : MonoBehaviour
         }
 
     }
+    private void FixedUpdate()
+    {
+        lightTimer();
+        Debug.Log(inLight);
+    }
+
+    private void checkEnemies() {
+
+        GameObject[] EnemyList = GameObject.FindGameObjectsWithTag("Enemy");
+
+
+        foreach (GameObject g in EnemyList)
+        {
+            //Debug.Log(Vector3.Distance(g.transform.position, gameObject.transform.position));
+        }
+
+    }
+
+    public void setInLight(Vector3 lightPos)
+    {
+        float dist = Vector3.Distance(transform.position, lightPos);
+        //Debug.Log(dist);
+        
+        if(dist < maxLightDetectionNumber)
+        {
+            inLight = true;
+            inLightTimerCur = inLightTimerMax;
+        }
+
+
+    }
+
+    public void lightTimer()
+    {
+        if(inLight)
+        {
+            inLightTimerCur -= .1f;
+            //Debug.Log(inLightTimerCur);
+            if(inLightTimerCur <= 0)
+            {
+                inLight = false;
+            }
+        }
+    }
+
 
 }
