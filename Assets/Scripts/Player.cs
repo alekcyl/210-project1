@@ -10,10 +10,15 @@ public class Player : MonoBehaviour
     public float jumpSpeed;
     public float verticalSpeed;
     public float moveSpeed;
+
     public bool inLight;
     public float inLightTimerCur;
     public float inLightTimerMax;
     public float maxLightDetectionNumber;
+
+    public bool isSeen;
+    public float seenTimerCur;
+    public float seenTimerMax;
 
     private void Start()
     {
@@ -58,7 +63,11 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         lightTimer();
-        Debug.Log(inLight);
+        if(isSeen)
+        {
+            seenTimer();
+        }
+        //Debug.Log(inLight);
     }
 
     private void checkEnemies() {
@@ -77,17 +86,35 @@ public class Player : MonoBehaviour
     {
         float dist = Vector3.Distance(transform.position, lightPos);
         //Debug.Log(dist);
-        
-        if(dist < maxLightDetectionNumber)
+
+        if (dist < maxLightDetectionNumber)
         {
             inLight = true;
             inLightTimerCur = inLightTimerMax;
         }
-
-
     }
 
-    public void lightTimer()
+    public void setIsSeen()
+    {
+        if(inLight) {
+            isSeen = true;
+            seenTimerCur = seenTimerMax;
+        }
+    }
+
+    private void seenTimer()
+    {
+        seenTimerCur -= .1f;
+        Debug.Log(seenTimerCur);
+        if(seenTimerCur <= 0)
+        {
+            isSeen = false;
+        }
+    }
+
+
+
+    private void lightTimer()
     {
         if(inLight)
         {
