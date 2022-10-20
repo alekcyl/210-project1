@@ -68,6 +68,7 @@ public class Player : MonoBehaviour
             seenTimer();
         }
         //Debug.Log(inLight);
+        IsSeenCheck();
     }
 
     private void checkEnemies() {
@@ -99,6 +100,7 @@ public class Player : MonoBehaviour
         if(inLight) {
             isSeen = true;
             seenTimerCur = seenTimerMax;
+            Debug.Log("Player Seen");
         }
     }
 
@@ -127,5 +129,9 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void IsSeenCheck()
+    {
+
+    }
 
 }
