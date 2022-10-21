@@ -79,10 +79,10 @@ public class Player : MonoBehaviour
         GameObject[] EnemyList = GameObject.FindGameObjectsWithTag("Enemy");
 
 
-        foreach (GameObject g in EnemyList)
-        {
-            //Debug.Log(Vector3.Distance(g.transform.position, gameObject.transform.position));
-        }
+        //foreach (GameObject g in EnemyList)
+        //{
+        //    //Debug.Log(Vector3.Distance(g.transform.position, gameObject.transform.position));
+        //}
 
     }
 
@@ -134,7 +134,7 @@ public class Player : MonoBehaviour
 
     private void IsSeenCheck()
     {
-        if(isSeen)
+        if (isSeen)
         {
             playerMaterial.color = Color.red;
             Debug.Log("is seen");
@@ -146,4 +146,5 @@ public class Player : MonoBehaviour
         }
     }
 
+    
 }
