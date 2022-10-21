@@ -20,10 +20,13 @@ public class Player : MonoBehaviour
     public float seenTimerCur;
     public float seenTimerMax;
 
+    public Material playerMaterial;
+
     private void Start()
     {
         //Cursor.lockState = CursorLockMode.Locked;
-       
+        playerMaterial.color = Color.white;
+
     }
 
     // Update is called once per frame
@@ -131,7 +134,16 @@ public class Player : MonoBehaviour
 
     private void IsSeenCheck()
     {
-
+        if(isSeen)
+        {
+            playerMaterial.color = Color.red;
+            Debug.Log("is seen");
+        }
+        else
+        {
+            playerMaterial.color = Color.white;
+            Debug.Log("is Hidden");
+        }
     }
 
 }

@@ -406,7 +406,8 @@ MonoBehaviour:
   maxLightDetectionNumber: 5
   isSeen: 0
   seenTimerCur: 0
-  seenTimerMax: 0
+  seenTimerMax: 5
+  playerMaterial: {fileID: 2100000, guid: 7535d248ed10940a1ad57805280dc701, type: 2}
 --- !u!136 &477610357
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -440,7 +441,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 7535d248ed10940a1ad57805280dc701, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
