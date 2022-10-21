@@ -29,7 +29,7 @@ public class Enemy : MonoBehaviour
     {
         RaycastHit hit;
         Debug.DrawRay(flashlightTransform.position, transform.right * 3);
-        if (Physics.Raycast(flashlightTransform.position, transform.right, out hit, 3))
+        if (Physics.Raycast(flashlightTransform.position, transform.right, out hit, 3.5f))
         {
             if(hit.collider.gameObject.GetComponent<Player>() != null)
             {
