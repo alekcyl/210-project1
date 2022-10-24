@@ -28,6 +28,7 @@ public class EnemyFlashlight : MonoBehaviour
 
     private void MoveLight()
     {
+        //move location of light up and down
         if (transform.localPosition.y < maxRange && isUp)
         {
             transform.position += new Vector3(0, moveDist, 0);

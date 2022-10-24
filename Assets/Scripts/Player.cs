@@ -35,25 +35,26 @@ public class Player : MonoBehaviour
     private void Update()
     {
         checkEnemies();
-        //first person movement controls
+
+        //movement controls
         Vector3 movement = Vector3.zero;
 
-        
+        //get movement input & rotate player according to input
         float movementInput = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
         if(Input.GetAxis("Horizontal") < 0)
         {
-            //transform.Rotate(new Vector3(0f, 90f, 0f));
             parent.transform.rotation = Quaternion.Euler(new Vector3(0f, -90f, 0f));
             
         } else if(Input.GetAxis("Horizontal") > 0)
         {
-            //transform.Rotate(new Vector3(0f, -90f, 0f));
             parent.transform.rotation = Quaternion.Euler(new Vector3(0f, 90f, 0f));
         }
         else
         {
 
         }
+
+        //set animations
         if (movementInput == 0)
         {
             ani.SetBool("isIdle", true);
@@ -70,8 +71,10 @@ public class Player : MonoBehaviour
             ani.SetBool("isJumping", true);
         }
 
+        //move players transform
         movement += (Vector3.right * movementInput);
-        //movement += (transform.forward * movementInput);
+
+        //player jump
         if (charController.isGrounded)
         {
             
@@ -90,13 +93,6 @@ public class Player : MonoBehaviour
         movement += (transform.up * verticalSpeed * Time.deltaTime);
 
         charController.Move(movement);
-
-       
-        if (Input.GetMouseButtonDown(0))
-        {
-           
-        }
-
     }
     private void FixedUpdate()
     {
@@ -105,12 +101,12 @@ public class Player : MonoBehaviour
         {
             seenTimer();
         }
-        //Debug.Log(inLight);
         IsSeenCheck();
     }
 
     private bool GroundCheck()
     {
+        //checks to see if player is grounded. Needed for jumping animation.
         RaycastHit hit;
         if (Physics.Raycast(transform.position, -Vector3.up * .5f, out hit))
         {
@@ -125,7 +121,7 @@ public class Player : MonoBehaviour
 
     }
     private void checkEnemies() {
-
+        //find all enemies in scene
         GameObject[] EnemyList = GameObject.FindGameObjectsWithTag("Enemy");
 
 
@@ -138,6 +134,7 @@ public class Player : MonoBehaviour
 
     public void setInLight(Vector3 lightPos)
     {
+        //set
         float dist = Vector3.Distance(transform.position, lightPos);
         //Debug.Log("position" + transform.position);
         if (dist < maxLightDetectionNumber)

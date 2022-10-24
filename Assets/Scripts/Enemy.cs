@@ -27,6 +27,7 @@ public class Enemy : MonoBehaviour
     }
     private void CheckPlayer()
     {
+        //check to see if flashlight hits the player
         RaycastHit hit;
         Debug.DrawRay(flashlightTransform.position, transform.right * 3);
         if (Physics.Raycast(flashlightTransform.position, transform.right, out hit, 3.5f))
@@ -42,6 +43,7 @@ public class Enemy : MonoBehaviour
 
     private void FacingDirTimer()
     {
+        //timer to change enemy facing direction
         facingDirTimerCur -= .01f;
         //Debug.Log(facingDirTimerCur);
         if (facingDirTimerCur <= 0)
@@ -53,6 +55,7 @@ public class Enemy : MonoBehaviour
 
     private void ChangeDirection()
     {
+        //changes the facing direction of enemy
         xAxisDirection *= -1;
         if(xAxisDirection == -1)
         {

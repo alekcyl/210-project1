@@ -22,6 +22,7 @@ public class LightCast : MonoBehaviour
 
     private void CheckPlayer()
     {
+        //send hit info on light to player
         RaycastHit hit;
         Debug.DrawRay(lightPos.position, lightPos.forward * 100);
         if (Physics.Raycast(lightPos.position, lightPos.forward * 100, out hit))

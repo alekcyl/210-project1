@@ -10,10 +10,12 @@ public class Camera : MonoBehaviour
 
     private void Start()
     {
+        //find all lights in scene
         lightList = GameObject.FindGameObjectsWithTag("Light");
     }
     void LateUpdate()
     {
+        //follow player
         transform.position = Vector3.Lerp(transform.position,
             new Vector3(Target.position.x, Target.position.y, transform.position.z), Time.deltaTime * 10);
     }
@@ -24,7 +26,7 @@ public class Camera : MonoBehaviour
     }
     public void LightRenderer()
     {
-        
+        //deactivate lights that are off screen, and reactivate them as needed.
         foreach(GameObject g in lightList)
         {
             //Debug.Log(g);
