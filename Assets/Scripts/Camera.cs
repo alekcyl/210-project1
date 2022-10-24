@@ -27,7 +27,7 @@ public class Camera : MonoBehaviour
         
         foreach(GameObject g in lightList)
         {
-            Debug.Log(g);
+            //Debug.Log(g);
             float dist = Vector3.Distance(Target.transform.position, g.transform.position);
             if(dist > maxLightRange)
             {

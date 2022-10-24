@@ -4,7 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour
-{ 
+{
+    public GameObject parent;
+    public Animator ani;
     public CharacterController charController;
     public float gravity = -9.8f;
     public float jumpSpeed;
@@ -33,22 +35,55 @@ public class Player : MonoBehaviour
     private void Update()
     {
         checkEnemies();
-
         //first person movement controls
         Vector3 movement = Vector3.zero;
 
         
         float movementInput = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
+        if(Input.GetAxis("Horizontal") < 0)
+        {
+            //transform.Rotate(new Vector3(0f, 90f, 0f));
+            parent.transform.rotation = Quaternion.Euler(new Vector3(0f, -90f, 0f));
+            
+        } else if(Input.GetAxis("Horizontal") > 0)
+        {
+            //transform.Rotate(new Vector3(0f, -90f, 0f));
+            parent.transform.rotation = Quaternion.Euler(new Vector3(0f, 90f, 0f));
+        }
+        else
+        {
 
-        movement += (transform.right * movementInput);
+        }
+        if (movementInput == 0)
+        {
+            ani.SetBool("isIdle", true);
+        }
+        else
+        {
+            ani.SetBool("isIdle", false);
+        }
+        if(GroundCheck())
+        {
+            ani.SetBool("isJumping", false);
+        } else
+        {
+            ani.SetBool("isJumping", true);
+        }
 
+        movement += (Vector3.right * movementInput);
+        //movement += (transform.forward * movementInput);
         if (charController.isGrounded)
         {
+            
             verticalSpeed = 0f;
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 verticalSpeed = jumpSpeed;
             }
+            
+        } else
+        {
+           
         }
 
         verticalSpeed += (gravity * Time.deltaTime);
@@ -74,6 +109,21 @@ public class Player : MonoBehaviour
         IsSeenCheck();
     }
 
+    private bool GroundCheck()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, -Vector3.up * .5f, out hit))
+        {
+            return true;
+        } else
+        {
+            return false;
+        }
+
+
+
+
+    }
     private void checkEnemies() {
 
         GameObject[] EnemyList = GameObject.FindGameObjectsWithTag("Enemy");
@@ -89,8 +139,7 @@ public class Player : MonoBehaviour
     public void setInLight(Vector3 lightPos)
     {
         float dist = Vector3.Distance(transform.position, lightPos);
-        //Debug.Log(dist);
-
+        //Debug.Log("position" + transform.position);
         if (dist < maxLightDetectionNumber)
         {
             inLight = true;
@@ -103,14 +152,14 @@ public class Player : MonoBehaviour
         if(inLight) {
             isSeen = true;
             seenTimerCur = seenTimerMax;
-            Debug.Log("Player Seen");
+            Debug.Log("Player Seen 123");
         }
     }
 
     private void seenTimer()
     {
         seenTimerCur -= .1f;
-        Debug.Log(seenTimerCur);
+        //Debug.Log(seenTimerCur);
         if(seenTimerCur <= 0)
         {
             isSeen = false;
@@ -137,7 +186,7 @@ public class Player : MonoBehaviour
         if (isSeen)
         {
             playerMaterial.color = Color.red;
-            Debug.Log("is seen");
+            //Debug.Log("is seen");
         }
         else
         {
