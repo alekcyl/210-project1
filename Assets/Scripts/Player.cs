@@ -5,29 +5,37 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    //references
     public GameObject parent;
     public Animator ani;
     public CharacterController charController;
+    public Material playerMaterial;
+
+    //movement
     public float gravity = -9.8f;
     public float jumpSpeed;
     public float verticalSpeed;
     public float moveSpeed;
 
+    //lighting
     public bool inLight;
     public float inLightTimerCur;
     public float inLightTimerMax;
     public float maxLightDetectionNumber;
 
+    //seen
     public bool isSeen;
     public float seenTimerCur;
     public float seenTimerMax;
 
-    public Material playerMaterial;
+    //life
+    public bool isAlive;
 
     private void Start()
     {
         //Cursor.lockState = CursorLockMode.Locked;
         playerMaterial.color = Color.white;
+        isAlive = true;
 
     }
 
@@ -188,9 +196,15 @@ public class Player : MonoBehaviour
         else
         {
             playerMaterial.color = Color.white;
-            Debug.Log("is Hidden");
+            //Debug.Log("is Hidden");
         }
     }
 
-    
+    public void OnTriggerEnter(Collider col)
+    {
+        if(col.tag == "Laser")
+        {
+            //Debug.Log("hit laser");
+        }
+    }
 }
