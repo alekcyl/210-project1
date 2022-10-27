@@ -204,7 +204,9 @@ public class Player : MonoBehaviour
     {
         if(col.tag == "Laser")
         {
-            //Debug.Log("hit laser");
+            isAlive = false;
+            playerMaterial.color = Color.red;
+            Debug.Log("hit laser");
         }
     }
 }

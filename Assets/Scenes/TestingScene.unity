@@ -123,6 +123,23 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &131230730 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4046679130070610023, guid: 008c1173a9d4d452b84e260ee4e575a2, type: 3}
+  m_PrefabInstance: {fileID: 836541156918480433}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &131230731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 131230730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee592f5e91c674de58b24d270d0ca542, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &196824449
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -243,6 +260,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8139507276741591207, guid: 0181e1db76680438bb7dfecdf59e1fd6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b1d36282b2c17c84fb2f618cba0439a2, type: 2}
     - target: {fileID: 8139507276741591225, guid: 0181e1db76680438bb7dfecdf59e1fd6, type: 3}
       propertyPath: m_Name
       value: Barricade (1)
@@ -725,7 +746,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: b1d36282b2c17c84fb2f618cba0439a2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1418,7 +1439,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 51198a1995f484ec8be16afad512a10e, type: 2}
+  - {fileID: 2100000, guid: b1d36282b2c17c84fb2f618cba0439a2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1568,11 +1589,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 175207207997208452, guid: 008c1173a9d4d452b84e260ee4e575a2, type: 3}
       propertyPath: m_LocalScale.z
-      value: 4
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 175207207997208452, guid: 008c1173a9d4d452b84e260ee4e575a2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.92
+      value: 8.04
       objectReference: {fileID: 0}
     - target: {fileID: 175207207997208452, guid: 008c1173a9d4d452b84e260ee4e575a2, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1580,7 +1601,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 175207207997208452, guid: 008c1173a9d4d452b84e260ee4e575a2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.0091028
+      value: -1.04
       objectReference: {fileID: 0}
     - target: {fileID: 175207207997208452, guid: 008c1173a9d4d452b84e260ee4e575a2, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1614,6 +1635,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MovingPlatform
       objectReference: {fileID: 0}
+    - target: {fileID: 5632521966507330676, guid: 008c1173a9d4d452b84e260ee4e575a2, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b1d36282b2c17c84fb2f618cba0439a2, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 008c1173a9d4d452b84e260ee4e575a2, type: 3}
 --- !u!1001 &6328648661990236194
@@ -1698,11 +1723,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9061251078723227137, guid: f917e792ac7904ed585697707ece41bd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.22808984
+      value: 5.16
       objectReference: {fileID: 0}
     - target: {fileID: 9061251078723227137, guid: f917e792ac7904ed585697707ece41bd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.0326495
+      value: 0.95
       objectReference: {fileID: 0}
     - target: {fileID: 9061251078723227137, guid: f917e792ac7904ed585697707ece41bd, type: 3}
       propertyPath: m_LocalPosition.z
