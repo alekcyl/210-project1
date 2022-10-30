@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Light
   - Laser
+  - WinItem
   layers:
   - Default
   - TransparentFX

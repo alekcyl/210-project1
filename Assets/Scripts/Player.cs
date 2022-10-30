@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -42,6 +43,10 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if(isAlive == false)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
         checkEnemies();
 
         //movement controls
@@ -191,6 +196,7 @@ public class Player : MonoBehaviour
         if (isSeen)
         {
             playerMaterial.color = Color.red;
+            isAlive = false;
             //Debug.Log("is seen");
         }
         else
@@ -207,6 +213,9 @@ public class Player : MonoBehaviour
             isAlive = false;
             playerMaterial.color = Color.red;
             Debug.Log("hit laser");
+        } else if(col.tag == "WinItem")
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 }
