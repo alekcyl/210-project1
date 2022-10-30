@@ -6,14 +6,21 @@ public class Enemy : MonoBehaviour
 {
     public Player player;
     public Transform flashlightTransform;
+    public Material enemyMaterial;
+    public bool isRed;
+    public bool canSwapColor;
     public int xAxisDirection;
     public float facingDirTimerCur;
     public float facingDirTimerMax;
+
 
     // Start is called before the first frame update
     void Start()
     {
         xAxisDirection = 1;
+        isRed = false;
+        canSwapColor = true;
+        enemyMaterial.color = Color.white;
     }
 
     // Update is called once per frame
@@ -40,14 +47,34 @@ public class Enemy : MonoBehaviour
             }
         }
     }
+    private void SwapMaterialColor()
+    {
+        if(isRed)
+        {
+            isRed = false ;
+            enemyMaterial.color = Color.white;
+            
+        } else
+        {
+            isRed = true;
+            enemyMaterial.color = Color.red;
+        }
+    }
 
     private void FacingDirTimer()
     {
         //timer to change enemy facing direction
         facingDirTimerCur -= .01f;
         //Debug.Log(facingDirTimerCur);
+        if(facingDirTimerCur <= 1 && canSwapColor)
+        {
+            SwapMaterialColor();
+            canSwapColor = false;
+        }
         if (facingDirTimerCur <= 0)
         {
+            SwapMaterialColor();
+            canSwapColor = true;
             facingDirTimerCur = facingDirTimerMax;
             ChangeDirection();
         }

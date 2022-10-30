@@ -225,6 +225,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   flashlightTransform: {fileID: 26351669}
+  enemyMaterial: {fileID: 2100000, guid: 0c755a31144de42428dbf4fb142a19fd, type: 2}
   xAxisDirection: 0
   facingDirTimerCur: 0
   facingDirTimerMax: 5
