@@ -17,6 +17,12 @@ public class Player : MonoBehaviour
     public float jumpSpeed;
     public float verticalSpeed;
     public float moveSpeed;
+    public float maxCoyote;
+    public float curCoyote;
+    public bool canJump;
+    public bool isGrounded;
+    public bool hasJumped;
+
 
     //lighting
     public bool inLight;
@@ -37,16 +43,19 @@ public class Player : MonoBehaviour
         //Cursor.lockState = CursorLockMode.Locked;
         playerMaterial.color = Color.white;
         isAlive = true;
+        canJump = true;
 
     }
 
     // Update is called once per frame
     private void Update()
     {
+        //reload current scene if dead
         if(isAlive == false)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
+        //is currently used, but gives player reference to enemies in map
         checkEnemies();
 
         //movement controls
@@ -61,10 +70,6 @@ public class Player : MonoBehaviour
         } else if(Input.GetAxis("Horizontal") > 0)
         {
             parent.transform.rotation = Quaternion.Euler(new Vector3(0f, 90f, 0f));
-        }
-        else
-        {
-
         }
 
         //set animations
@@ -87,27 +92,49 @@ public class Player : MonoBehaviour
         //move players transform
         movement += (Vector3.right * movementInput);
 
-        //player jump
-        if (charController.isGrounded)
+        //player jump && grounding behavior
+
+        if (charController.isGrounded) //if grounded reset jumps
         {
-            
-            verticalSpeed = 0f;
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                verticalSpeed = jumpSpeed;
-            }
-            
+            hasJumped = false;
+            isGrounded = true;
         } else
         {
-           
+            isGrounded = false; //if not grounded still allow player to jump
         }
 
+        if(isGrounded) //if grounded dont let gravity do its thing
+        {
+            verticalSpeed = 0f;
+        }
+        if ((hasJumped == false)) //if player hasnt jumped, let them if they have coyote time
+        {
+            
+            if (Input.GetKeyDown(KeyCode.Space) && curCoyote > 0)
+            {
+                verticalSpeed = jumpSpeed;
+                hasJumped = true;
+
+            }
+        }
+        
+        //apply movement
         verticalSpeed += (gravity * Time.deltaTime);
         movement += (transform.up * verticalSpeed * Time.deltaTime);
 
         charController.Move(movement);
     }
-    private void FixedUpdate()
+
+    //timer for coyote time
+    private void CoyoteTimer()
+    {
+        if(curCoyote > 0)
+        {
+            curCoyote -= .1f;
+        } 
+        
+    }
+    private void FixedUpdate() //plays all timers at a regular pace
     {
         lightTimer();
         if(isSeen)
@@ -115,13 +142,20 @@ public class Player : MonoBehaviour
             seenTimer();
         }
         IsSeenCheck();
+        if(charController.isGrounded == false)
+        {
+            CoyoteTimer();
+        } else
+        {
+            curCoyote = maxCoyote;
+        }
     }
 
     private bool GroundCheck()
     {
         //checks to see if player is grounded. Needed for jumping animation.
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, -Vector3.up * .5f, out hit))
+        if (Physics.Raycast(transform.position, -Vector3.up * 2f, out hit))
         {
             return true;
         } else
@@ -135,7 +169,7 @@ public class Player : MonoBehaviour
     }
     private void checkEnemies() {
         //find all enemies in scene
-        GameObject[] EnemyList = GameObject.FindGameObjectsWithTag("Enemy");
+        //GameObject[] EnemyList = GameObject.FindGameObjectsWithTag("Enemy");
 
 
         //foreach (GameObject g in EnemyList)
@@ -145,11 +179,10 @@ public class Player : MonoBehaviour
 
     }
 
-    public void setInLight(Vector3 lightPos)
+    public void setInLight(Vector3 lightPos) //show if player is in the light
     {
-        //set
+        //calculates distance from the position the light hits the floor and player
         float dist = Vector3.Distance(transform.position, lightPos);
-        //Debug.Log("position" + transform.position);
         if (dist < maxLightDetectionNumber)
         {
             inLight = true;
@@ -157,33 +190,28 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void setIsSeen()
+    public void setIsSeen() //makes the player visable if they are in light
     {
         if(inLight) {
             isSeen = true;
             seenTimerCur = seenTimerMax;
-            Debug.Log("Player Seen 123");
         }
     }
-
-    private void seenTimer()
+    
+    private void seenTimer() //timer so player can become unseen
     {
         seenTimerCur -= .1f;
-        //Debug.Log(seenTimerCur);
         if(seenTimerCur <= 0)
         {
             isSeen = false;
         }
     }
 
-
-
-    private void lightTimer()
+    private void lightTimer() //timer so player can become unlit
     {
         if(inLight)
         {
             inLightTimerCur -= .1f;
-            //Debug.Log(inLightTimerCur);
             if(inLightTimerCur <= 0)
             {
                 inLight = false;
@@ -191,7 +219,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void IsSeenCheck()
+    private void IsSeenCheck() //checks to see if player is seen
     {
         if (isSeen)
         {
@@ -216,6 +244,9 @@ public class Player : MonoBehaviour
         } else if(col.tag == "WinItem")
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        } else if(col.tag == "Enemy")
+        {
+            isAlive = false;
         }
     }
 }
