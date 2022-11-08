@@ -244,7 +244,7 @@ public class Player : MonoBehaviour
             Debug.Log("hit laser");
         } else if(col.tag == "WinItem")
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            col.gameObject.GetComponent<Intel>().SetNextLevel();
         } else if(col.tag == "Enemy")
         {
             isAlive = false;
