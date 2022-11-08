@@ -6,18 +6,11 @@ public class MovingPlatform : MonoBehaviour
 {
     private Vector3 startPosition;
 
-    // Start is called before the first frame update
+    //simple script to make platform rotate with a sine wave
     void Start()
     {
         startPosition = transform.position;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void FixedUpdate()
     {
         MoveSelf();

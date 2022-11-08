@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class Drone : MonoBehaviour
 {
+    //references
     public Player player;
     public Material enemyMaterial;
+
+    //behavior
     public bool isRed;
     public bool canSwapColor;
     public int xAxisDirection;
@@ -42,14 +45,14 @@ public class Drone : MonoBehaviour
         {
             if (hit.collider.gameObject.GetComponent<Player>() != null)
             {
-                //Debug.Log(hit.point);
+                //make player seen if hit by drone ray
                 player.setIsSeen();
-                //Debug.Log("Player Seen");
             }
         }
     }
     private void SwapMaterialColor()
     {
+        //turn drone red for player feedback
         if (isRed)
         {
             isRed = false;
@@ -67,7 +70,7 @@ public class Drone : MonoBehaviour
     {
         //timer to change enemy facing direction
         facingDirTimerCur -= .01f;
-        //Debug.Log(facingDirTimerCur);
+    
         if (facingDirTimerCur <= 1 && canSwapColor)
         {
             SwapMaterialColor();

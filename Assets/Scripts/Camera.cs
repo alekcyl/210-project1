@@ -29,7 +29,7 @@ public class Camera : MonoBehaviour
         //deactivate lights that are off screen, and reactivate them as needed.
         foreach(GameObject g in lightList)
         {
-            //Debug.Log(g);
+            
             float dist = Vector3.Distance(Target.transform.position, g.transform.position);
             if(dist > maxLightRange)
             {

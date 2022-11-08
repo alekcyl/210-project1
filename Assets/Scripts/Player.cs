@@ -168,6 +168,7 @@ public class Player : MonoBehaviour
 
     }
     private void checkEnemies() {
+        //not currently in use
         //find all enemies in scene
         //GameObject[] EnemyList = GameObject.FindGameObjectsWithTag("Enemy");
 
