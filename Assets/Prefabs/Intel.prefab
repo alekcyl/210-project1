@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2331636740530783665}
   - component: {fileID: 2331636740530783664}
   m_Layer: 0
-  m_Name: WinItem
+  m_Name: Intel
   m_TagString: WinItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

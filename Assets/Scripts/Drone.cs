@@ -37,8 +37,8 @@ public class Drone : MonoBehaviour
     {
         //check to see if flashlight hits the player
         RaycastHit hit;
-        Debug.DrawRay(transform.position, -transform.up * 3);
-        if (Physics.Raycast(transform.position, -transform.up, out hit, 3.5f))
+        Debug.DrawRay(transform.position, -transform.up * 5);
+        if (Physics.Raycast(transform.position, -transform.up, out hit, 5f))
         {
             if (hit.collider.gameObject.GetComponent<Player>() != null)
             {

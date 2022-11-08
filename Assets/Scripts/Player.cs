@@ -185,6 +185,7 @@ public class Player : MonoBehaviour
         float dist = Vector3.Distance(transform.position, lightPos);
         if (dist < maxLightDetectionNumber)
         {
+            Debug.Log(inLight);
             inLight = true;
             inLightTimerCur = inLightTimerMax;
         }
